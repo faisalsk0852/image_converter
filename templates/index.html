@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Image Converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6a5acd;
+            --background-color: #f4f7fc;
+            --card-background: #ffffff;
+            --text-color: #333;
+            --light-gray: #ccc;
+            --success-color: #28a745;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding-top: 80px; /* Add padding to prevent content from hiding behind the fixed nav */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: var(--card-background);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+        .file-upload-wrapper {
+            position: relative;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            border: 2px dashed var(--light-gray);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+        .file-upload-wrapper:hover {
+            border-color: var(--primary-color);
+            background-color: #fdfcff;
+        }
+        .file-upload-wrapper span {
+            color: #777;
+            font-size: 1.1em;
+        }
+        #filename-display {
+            font-weight: 500;
+            color: var(--success-color);
+            margin-top: 15px;
+            font-size: 1em;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 30px;
+            background: linear-gradient(45deg, var(--primary-color), #8a2be2);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(106, 90, 205, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+<style>
+    nav {
+        background-color: white;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        position: absolute;
+        top: 0;
+        left: 0; /* Added for full width */
+        width: 100%;
+        box-sizing: border-box; /* Ensures padding is included in width */
+    }
+    nav a {
+        text-decoration: none;
+        color: #6a5acd;
+        font-weight: 500;
+        padding: 8px 15px;
+        border-radius: 8px;
+        transition: background-color 0.2s;
+        margin: 0 10px;
+    }
+    nav a:hover {
+        background-color: #f0ebff;
+    }
+    nav a.active {
+        background-color: #6a5acd;
+        color: white;
+    }
+</style>
+<nav>
+    <a href="/" class="active">Image Converter</a>
+    <a href="/link-creator">Link Creator</a>
+</nav>
+
+    <div class="container">
+        <h1>Multi-Image to HTML Zipper</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label for="images" class="file-upload-wrapper">
+                <span>📂 Drag & drop images or click to browse</span>
+                <div id="filename-display"></div>
+            </label>
+            <input type="file" name="images" id="images" required multiple>
+            
+            <button type="submit" class="submit-btn">Generate ZIP File</button>
+        </form>
+    </div>
+
+<script>
+    const imageInput = document.getElementById("images");
+    const filenameDisplay = document.getElementById("filename-display");
+
+    imageInput.addEventListener('change', function() {
+        if (this.files.length > 1) {
+            filenameDisplay.textContent = `${this.files.length} files selected`;
+        } else if (this.files.length === 1) {
+            filenameDisplay.textContent = `Selected: ${this.files[0].name}`;
+        } else {
+            filenameDisplay.textContent = '';
+        }
+    });
+</script>
+</body>
+</html>
